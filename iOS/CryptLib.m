@@ -148,7 +148,7 @@
 {
     const char *cStr = [input UTF8String];
     unsigned char digest[16];
-    CC_MD5( cStr, strlen(cStr), digest ); // This is the md5 call
+    CC_MD5( cStr, (unsigned int)strlen(cStr), digest ); // This is the md5 call
     
     NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
     
@@ -185,7 +185,7 @@
     NSData *keyData=[NSData dataWithBytes:s length:strlen(s)];
     
     uint8_t digest[CC_SHA256_DIGEST_LENGTH]={0};
-    CC_SHA256(keyData.bytes, keyData.length, digest);
+    CC_SHA256(keyData.bytes, (unsigned int)keyData.length, digest);
     NSData *out=[NSData dataWithBytes:digest length:CC_SHA256_DIGEST_LENGTH];
     NSString *hash=[out description];
     hash = [hash stringByReplacingOccurrencesOfString:@" " withString:@""];
